@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+                * element that contains the map. */
+            #map {
+                height: 100%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div id="map"></div>
+        
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmCfMKkfV9MYbqWGUMOzA4I1RsGSLMhEQ&callback=initMap"></script>
+        <script>
+            var map;
+
+            var cities = [
+                {city: 'Manchester', lat: 53.472225, lng: -2.293502},
+                {city: 'Hereford', lat: 52.0527447, lng: -2.7411443},
+                {city: 'Blackburn', lat: 53.7496284, lng: -2.5299493},
+                {city: 'Gateshead', lat: 54.9420985, lng: -1.6240662},
+                {city: 'Nothwich', lat: 53.2545459, lng: -2.5332582},
+                {city: 'Blackpool', lat: 53.8253885, lng: -3.0942414},
+                {city: 'Praga', lat: 50.0595854, lng: 14.3255428},
+                {city: 'Ceské Budejovice', lat: 48.9763472, lng: 14.4555279},
+                {city: 'Pisek', lat: 49.2864232, lng: 14.1344627},
+                {city: 'Teplice', lat: 50.6449556, lng: 13.7883504}
+            ];
+            
+            var initPoint = {lat: cities[0].lat, lng: cities[0].lng}
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: initPoint,
+                    zoom: 8
+                });
+
+                cities.forEach(function(element) {
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(element.lat, element.lng),
+                        map: map
+                    });
+                });
+            }
+        </script>
+    </body>
+</html>
+<!--
+<script>
+        
+    function initMap() {
+    var myLatLng = {lat: -25.363, lng: 131.044};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: myLatLng
+    });
+
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+    });
+    }
+</script>
+-->
