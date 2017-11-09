@@ -27,18 +27,20 @@
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmCfMKkfV9MYbqWGUMOzA4I1RsGSLMhEQ&callback=initMap"></script>
         <script>
             var map;
+            var infowindow;
 
             var cities = [
-                {city: 'Manchester', lat: 53.472225, lng: -2.293502},
-                {city: 'Hereford', lat: 52.0527447, lng: -2.7411443},
-                {city: 'Blackburn', lat: 53.7496284, lng: -2.5299493},
-                {city: 'Gateshead', lat: 54.9420985, lng: -1.6240662},
-                {city: 'Nothwich', lat: 53.2545459, lng: -2.5332582},
-                {city: 'Blackpool', lat: 53.8253885, lng: -3.0942414},
-                {city: 'Praga', lat: 50.0595854, lng: 14.3255428},
-                {city: 'Ceské Budejovice', lat: 48.9763472, lng: 14.4555279},
-                {city: 'Pisek', lat: 49.2864232, lng: 14.1344627},
-                {city: 'Teplice', lat: 50.6449556, lng: 13.7883504}
+                {city: 'Manchester', venue: '', date: '', lat: 53.472225, lng: -2.293502},
+                {city: 'Hereford', venue: 'The Booth Hall', date: '27/07/2017', lat: 52.0527447, lng: -2.7411443},
+                {city: 'Blackburn', venue: 'Sir Charles Napier', date: '28/07/2017',  lat: 53.7496284, lng: -2.5299493},
+                {city: 'Ashton-under-Lyne', venue: 'The Witchwood', date: '29/07/2017', lat: 53.4986372, lng: -2.1230689},
+                {city: 'Gateshead', venue: 'Black Bull', date: '30/07/2017',  lat: 54.9420985, lng: -1.6240662},
+                {city: 'Nothwich', venue: 'The Salty Dog', date: '01/08/2017',  lat: 53.2545459, lng: -2.5332582},
+                {city: 'Blackpool', venue: 'Rebellion Festivals', date: '04/08/2017',  lat: 53.8253885, lng: -3.0942414},
+                {city: 'Praga', venue: 'Vagon Klub', date: '09/08/2017',  lat: 50.0595854, lng: 14.3255428},
+                {city: 'Ceské Budejovice', venue: 'Velbloud Music Bar', date: '10/08/2017',  lat: 48.9763472, lng: 14.4555279},
+                {city: 'Pisek', venue: 'Klub Papírák', date: '11/08/2017',  lat: 49.2864232, lng: 14.1344627},
+                {city: 'Teplice', venue: 'Rajce Klub', date: '12/08/2017',  lat: 50.6449556, lng: 13.7883504}
             ];
             
             var initPoint = {lat: cities[0].lat, lng: cities[0].lng}
@@ -50,32 +52,21 @@
                 });
 
                 cities.forEach(function(element) {
+                    var infowindow = new google.maps.InfoWindow;
+                    infowindow.setContent('<h2>' + element.city + '</h2><p>Venue: ' + element.venue + '</p><p>Date: ' + element.date + '</p>');
+
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(element.lat, element.lng),
                         map: map,
                         title: element.city
                     });
+
+                    marker.addListener('click', function() {
+                        infowindow.open(map, marker);
+                    });
+
                 });
             }
         </script>
     </body>
 </html>
-<!--
-<script>
-        
-    function initMap() {
-    var myLatLng = {lat: -25.363, lng: 131.044};
-
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: myLatLng
-    });
-
-    var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title: 'Hello World!'
-    });
-    }
-</script>
--->
